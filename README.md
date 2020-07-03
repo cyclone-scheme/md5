@@ -42,7 +42,7 @@ None
 ```
 
 ## Author(s)
-Alex Shinn
+Justin Ethier
 
 ## Maintainer(s) 
 Arthur Maciel
