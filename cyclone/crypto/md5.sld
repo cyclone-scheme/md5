@@ -3,7 +3,7 @@
 ;;> Implementation of the MD5 (Message Digest) cryptographic hash.  In
 ;;> new applications SHA-2 should be preferred.
 
-(define-library (md5) ;(cyclone crypto md5)
+(define-library (cyclone crypto md5)
   (import (scheme base)
           (only (scheme char) string-downcase)
           (only (srfi 60) arithmetic-shift bitwise-and bitwise-ior bitwise-xor)
@@ -28,6 +28,32 @@
        bv.data = (char *)result;
        return_closcall1(data, k, &bv); ")
     (define (md5 str)
-      (md5-native str))
+      (let ((bv (md5-native str)))
+        (string-downcase 
+          (apply string-append
+            (map 
+              ;; TODO: clearly need better tooling here
+              (lambda (n) 
+                (let ((str (number->string n 16)))
+                  (cond
+                    ((= (string-length str) 0) "00")
+                    ((= (string-length str) 1) (string-append "0" str))
+                    (else str))))
+              (list (bytevector-u8-ref bv 0)
+                    (bytevector-u8-ref bv 1)
+                    (bytevector-u8-ref bv 2)
+                    (bytevector-u8-ref bv 3)
+                    (bytevector-u8-ref bv 4)
+                    (bytevector-u8-ref bv 5)
+                    (bytevector-u8-ref bv 6)
+                    (bytevector-u8-ref bv 7)
+                    (bytevector-u8-ref bv 8)
+                    (bytevector-u8-ref bv 9)
+                    (bytevector-u8-ref bv 10)
+                    (bytevector-u8-ref bv 11)
+                    (bytevector-u8-ref bv 12)
+                    (bytevector-u8-ref bv 13)
+                    (bytevector-u8-ref bv 14)
+                    (bytevector-u8-ref bv 15)))))))
     )
   )
