@@ -1,7 +1,4 @@
-;; Ported from Chibi Scheme
-
-;;> Implementation of the MD5 (Message Digest) cryptographic hash.  In
-;;> new applications SHA-2 should be preferred.
+;; MD5 implementation. As it is a vulnerable crypto hash, use sha-256 instead.
 
 (define-library (cyclone crypto md5)
   (import (scheme base)
@@ -54,6 +51,4 @@
                     (bytevector-u8-ref bv 12)
                     (bytevector-u8-ref bv 13)
                     (bytevector-u8-ref bv 14)
-                    (bytevector-u8-ref bv 15)))))))
-    )
-  )
+                    (bytevector-u8-ref bv 15)))))))))
