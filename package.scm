@@ -9,7 +9,7 @@
  (tags "crypto hash")
  (docs "https://github.com/cyclone-scheme/cyclone-winds/wiki/md5")
  (test "test.scm")
- (dependencies (bytevector))
+ (dependencies ())
  (test-dependencies ())
  (foreign-dependencies ())
  (library
