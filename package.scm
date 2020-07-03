@@ -14,4 +14,4 @@
  (foreign-dependencies ())
  (library
   (name (cyclone crypto md5))
-  (description "")))
+  (description "MD5 implementation")))
