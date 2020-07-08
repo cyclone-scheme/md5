@@ -8,22 +8,26 @@
   (include-c-header "md5-native.c")
   (begin
     (define-c md5-native
-      "(void *data, int argc, closure _, object k, object str)"
+      "(void *data, int argc, closure _, object k, object bv_in)"
       "MD5_CTX ctx;
        unsigned char result[17];
        make_empty_bytevector(bv);
 
-       Cyc_check_str(data, str); // TODO: what about other types??
+       Cyc_check_bvec(data, bv_in);
        MD5_Init(&ctx);
        MD5_Update(&ctx, 
-                  string_str(str),
-                  strlen( string_str(str) ));
+                  ((bytevector)bv_in)->data,
+                  ((bytevector)bv_in)->len);
        MD5_Final(result, &ctx);
        bv.len = 16;
        bv.data = (char *)result;
        return_closcall1(data, k, &bv); ")
-    (define (md5 str)
-      (let ((bv (md5-native str)))
+
+    (define (md5 inp)
+      (let ((bv (md5-native (cond ((string? inp)
+                                   (string->utf8 inp))
+                                  (else
+                                   inp))))) ;; Assumes bytevector
         (string-downcase
          (apply string-append
                 (map 

@@ -31,6 +31,9 @@ None
 
 #### [procedure]   `(md5 src)`
 
+Returns the md5 checksum of `src` as a lowercase hex-string.
+`src` can be either a string (interpreted as utf8) or a bytevector.
+
 
 ## Examples
 ```scheme
@@ -48,7 +51,7 @@ Justin Ethier
 Arthur Maciel
 
 ## Version 
-0.1
+0.2
 
 ## License 
 BSD
