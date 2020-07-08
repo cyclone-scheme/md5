@@ -31,13 +31,11 @@
         (string-downcase
          (apply string-append
                 (map 
-                 ;; TODO: clearly need better tooling here
                  (lambda (n) 
                    (let ((str (number->string n 16)))
-                     (cond
-                      ((= (string-length str) 0) "00")
-                      ((= (string-length str) 1) (string-append "0" str))
-                      (else str))))
+                     (if (= (string-length str) 1) 
+                         (string-append "0" str)
+                         str)))
                  (list (bytevector-u8-ref bv 0)
                        (bytevector-u8-ref bv 1)
                        (bytevector-u8-ref bv 2)
