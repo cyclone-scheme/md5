@@ -1,6 +1,6 @@
 (package
  (name md5)
- (version 0.2)
+ (version "0.2.0")
  (license "BSD")
  (authors "Justin Ethier")
  (maintainers "Arthur Maciel")
